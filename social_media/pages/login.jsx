@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import { Form, Segment, Divider, Button, Message } from "semantic-ui-react";
 import catchErrors from "./util/catchErrors";
 import axios from "axios";
-import {setToken} from "./util/auth";
+import { setToken } from "./util/auth";
+import Cookies from "js-cookie";
 // import { handle } from "express/lib/router";
 
 const login = () => {
@@ -17,6 +18,8 @@ const login = () => {
   const [errorMsg, setErrorMsg] = useState(null);
   const [formLoading, setFormLoading] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState(true);
+
+  //* Handlers ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,9 +43,17 @@ const login = () => {
     setFormLoading(false);
   };
 
+  //* UseEffects ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ /
+
   useEffect(() => {
     setSubmitDisabled(!(email && password));
   }, [user]);
+
+  useEffect(() => {
+    document.title = "Welcome Back";
+    const userEmail = Cookies.get("userEmail");
+    if (userEmail) setUser((prev) => ({ ...prev, email: userEmail }));
+  }, []);
 
   return (
     <>

@@ -10,11 +10,12 @@ function MyApp({ Component, pageProps }) {
   // const { Component, pageProps } = AppContext;
   // console.log(AppContext);
   return (
-    <Layout>
+    <Layout user={pageProps.user}>
       <Component {...pageProps} />
     </Layout>
   );
 }
+
 
 MyApp.getInitialProps = async ({ ctx, Component }) => {
   const { token } = parseCookies(ctx);

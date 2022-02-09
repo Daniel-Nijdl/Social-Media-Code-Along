@@ -7,7 +7,7 @@ export const NoProfilePost = () => {
         info
         icon="meh"
         header="Sorry"
-        content="User had no posted anything yet"
+        content="User had not posted anything yet"
       />
       <Button
         icon="long arrow alternate left"

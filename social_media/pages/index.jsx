@@ -1,15 +1,19 @@
-import axios from "axios";
-import { Divider } from "semantic-ui-react";
-import { parseCookies } from "nookies";
+// import axios from "axios";
+// import { Divider } from "semantic-ui-react";
+// import { parseCookies } from "nookies";
+import { useEffect } from "react";
 
-const index = () => {
-  return <>
-    Home Page
-  </>;
-}
+const index = ({ user }) => {
+  //* UseEffects ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+  useEffect(() => {
+    document.title = `Welcome, ${user.name.split(" ")[0]}`;
+  }, {});
+
+  return <div>Home Page</div>;
+};
 
 export default index;
-
 
 // const index = ({ posts, token }) => {
 //   return (
