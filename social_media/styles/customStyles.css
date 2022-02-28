@@ -2,9 +2,9 @@
   --primary-bg-color: #ebedf3;
   --secondary-bg-color: #bdbdbd;
   --tertiary-bg-color: #fdfdfd;
-  --button-bg-color: #e1f7f7;
+  --button-bg-color: #a9e9e9;
   --button-bg-border-color: #10a3a3;
-  --button-bg-active-color: #bfe0e0;
+  --button-bg-active-color: #8eecec;
   --button-box-shadow-color: #c1c1c1;
   --primary-text-color: #4183C4;
 }
@@ -25,7 +25,7 @@ body {
   background: var(--button-bg-color) !important;
   opacity: 100;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1) !important;
-  border: var(--button-bg-border-color) solid 1.5px !important;
+  /* border: var(--button-bg-border-color) solid 1.5px !important; */
 }
 
 .loginButton:active {
@@ -33,7 +33,25 @@ body {
   -webkit-box-shadow: inset 0px 0px 5px var(--button-box-shadow-color);
   -moz-box-shadow: inset 0px 0px 5px var(--button-box-shadow-color);
   box-shadow: inset 0px 0px 5px var(--button-box-shadow-color);
-  border: var(--button-bg-border-color) solid 1.5px !important;
+  /* border: var(--button-bg-border-color) solid 1.5px !important; */
+  caret-color: black !important;
+}
+
+.postButton {
+  background: var(--button-bg-color) !important;
+  /* -webkit-text-stroke: 1px grey; */
+  letter-spacing: 1px;
+  opacity: 100;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1) !important;
+  /* border: var(--button-bg-border-color) solid 1.5px !important; */
+}
+
+.postButton:active {
+  background: var(--button-bg-active-color) !important;
+  -webkit-box-shadow: inset 0px 0px 5px var(--button-box-shadow-color);
+  -moz-box-shadow: inset 0px 0px 5px var(--button-box-shadow-color);
+  box-shadow: inset 0px 0px 5px var(--button-box-shadow-color);
+  /* border: var(--button-bg-border-color) solid 1.5px !important; */
   caret-color: black !important;
 }
 

@@ -22,7 +22,7 @@ MyApp.getInitialProps = async ({ ctx, Component }) => {
   const { token } = parseCookies(ctx);
   let pageProps = {};
 
-  const protectedRoutes = ["/"];
+  const protectedRoutes = ["/", "/[username]"];
 
   const isProtectedRoute = protectedRoutes.includes(ctx.pathname);
 

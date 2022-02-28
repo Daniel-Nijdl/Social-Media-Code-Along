@@ -137,7 +137,15 @@ const CreatePost = ({ user, setPosts }) => {
           )}
         </div>
         <Divider hidden />
-        <Button />
+        <Button
+          circular
+          style={{backgroundColor: "teal", color: "white"}}
+          disabled={newPost.text === "" || loading}
+          icon="send"
+          content={<strong>Post</strong>}
+          loading={loading}
+          className="postButton"
+        />
       </Form>
       <Divider />
     </>
