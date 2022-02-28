@@ -180,13 +180,14 @@ const signup = () => {
             icon={{
               name: showPassword ? "eye slash" : "eye",
               // color: showPassword ? "red" : "green",
-              circular: true,
+              circular: false,
               link: true,
               onClick: () => setShowPassword(!showPassword),
             }}
             iconPosition="left"
             type={showPassword ? "text" : "password"}
           />
+
           <Form.Input
             loading={usernameLoading}
             error={!usernameAvailable}

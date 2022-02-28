@@ -21,7 +21,12 @@ const Layout = ({ children, user }) => {
       <HeadTag />
       {user ? (
         <>
-          <div style={{ marginLeft: "1rem", marginRight: "1rem" }}>
+          <div
+            style={{
+              marginLeft: "1rem",
+              marginRight: "1rem",
+            }}
+          >
             <Ref innerRef={contextRef}>
               <Grid>
                 <Grid.Column width={2}>
@@ -44,7 +49,7 @@ const Layout = ({ children, user }) => {
       ) : (
         <>
           <Navbar />
-          <Container text style={{ paddingTop: "1rem" }}>
+          <Container text style={{ paddingTop: "1rem" }} >
             {children}
           </Container>
         </>

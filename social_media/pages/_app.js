@@ -1,6 +1,7 @@
 import Layout from "../pages/components/layout/Layout";
 import "../styles/globals.css";
 import "semantic-ui-css/semantic.min.css";
+import "../styles/customStyles.css"
 import { redirectUser } from "./util/auth";
 import { destroyCookie, parseCookies } from "nookies";
 import axios from "axios";

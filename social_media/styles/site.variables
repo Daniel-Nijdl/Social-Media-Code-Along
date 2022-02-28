@@ -1,0 +1,9 @@
+
+//* Site Settings //
+
+/*---  Colors  ---*/
+@darkBlue           : #003B6D;
+@lightBlue          : #6699CC;
+@lightGrey          : #EBEDF3;
+@medGrey            : #BDBDBD;
+@darkGrey           : #676767;

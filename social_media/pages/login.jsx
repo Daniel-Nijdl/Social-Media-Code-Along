@@ -69,7 +69,7 @@ const login = () => {
           content={errorMsg}
           onDismiss={() => setErrorMsg(null)}
         />
-        <Segment>
+        <Segment className="login-segment">
           <Form.Input
             required
             label="Email"
@@ -103,8 +103,8 @@ const login = () => {
             icon="signup"
             content="Login"
             type="submit"
-            color="green"
             disabled={submitDisabled}
+            className="loginButton"
           />
         </Segment>
       </Form>
@@ -114,3 +114,5 @@ const login = () => {
 };
 
 export default login;
+
+

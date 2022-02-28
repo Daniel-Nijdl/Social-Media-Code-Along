@@ -14,3 +14,13 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.ui.secondary.pointing.menu.nav-bar {
+  height: 50px;
+  padding: 0 10px;
+  background-color: #BDBDBD;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  margin-bottom: 10px;
+}
+
+
