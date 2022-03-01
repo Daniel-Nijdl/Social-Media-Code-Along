@@ -38,6 +38,21 @@ const getProfile = async (req, res) => {
 
 const getUserPosts = async (req, res) => {
   try {
+    const { username } = req.params;
+    const user = await UserModel.findOne({ username: username.toLowerCase() });
+
+    if (!user) {
+      return res.status(404).send("User Not Found");
+    }
+
+    const posts = await PostModel.find({ user: user._id })
+      .sort({
+        createdAt: -1,
+      })
+      .populate("user")
+      .populate("comments.user");
+
+    return res.status(200).json(posts);
   } catch (error) {
     console.log(error);
     return res.status(500).send("Error @ getUserPosts");
@@ -46,6 +61,11 @@ const getUserPosts = async (req, res) => {
 
 const getFollowers = async (req, res) => {
   try {
+    const { userId } = req.params;
+    const user = await FollowerModel.findOne({ user: userId }).populate(
+      "followers.user"
+    );
+    return res.status(200).json(user.followers);
   } catch (error) {
     console.log(error);
     return res.status(500).send("Error @ getFollowers");
@@ -54,6 +74,11 @@ const getFollowers = async (req, res) => {
 
 const getFollowing = async (req, res) => {
   try {
+    const { userId } = req.params;
+    const user = await FollowerModel.findOne({ user: userId }).populate(
+      "following.user"
+    );
+    return res.status(200).json(user.following);
   } catch (error) {
     console.log(error);
     return res.status(500).send("Error @ getFollowing");
@@ -100,5 +125,5 @@ module.exports = {
   followUser,
   unfollowUser,
   updateProfile,
-  updatePassword
+  updatePassword,
 };
