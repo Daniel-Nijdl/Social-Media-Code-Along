@@ -8,6 +8,9 @@ import CardPost from "./components/post/CardPost";
 import ProfileHeader from "./components/profile/ProfileHeader";
 import ProfileMenuTabs from "./components/profile/ProfileMenuTabs";
 import { baseURL } from "./util/auth";
+import { NoProfilePost } from "./components/layout/NoData";
+import { PlaceholderPosts } from "./components/layout/PlaceHolderGroup";
+import Followers from "./components/profile/followers";
 
 const ProfilePage = ({
   errorLoading,
@@ -72,7 +75,28 @@ const ProfilePage = ({
                 loggedUserFollowStats={loggedUserFollowStats}
                 setLoggedUserFollowStats={setLoggedUserFollowStats}
               />
+              {loading ? (
+                <PlaceholderPosts />
+              ) : posts ? (
+                posts.map(post => (
+                  <CardPost key={post.id} 
+                  post={post}
+                  user={user}
+                  setPosts={setPosts}
+                  />
+                ))
+              ) : (
+                <NoProfilePost />
+              )}
             </>
+          )}
+          {activeItem === "followers" && (
+            <Followers
+              user={user}
+              loggedUserFollowStats={loggedUserFollowStats}
+              setLoggedUserFollowStats={setLoggedUserFollowStats}
+              profileUserId={profile.user._id}
+            />
           )}
         </Grid.Column>
       </Grid.Row>

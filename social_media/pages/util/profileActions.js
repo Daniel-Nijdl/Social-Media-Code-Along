@@ -22,7 +22,10 @@ export const followUser = async (userToFollowId, setLoggedUserFollowStats) => {
   }
 };
 
-export const unfollowUser = async (userToUnFollowId, setLoggedUserFollowStats) => {
+export const unfollowUser = async (
+  userToUnFollowId,
+  setLoggedUserFollowStats
+) => {
   try {
     await profileAxios.post(`/unfollow/${userToUnFollowId}`);
     setLoggedUserFollowStats((prev) => ({

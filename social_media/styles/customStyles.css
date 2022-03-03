@@ -69,3 +69,12 @@ body {
 .postCard{
   box-shadow: 0 1px 2px 0 rgb(34 36 38 / 15%);
 }
+
+.profileGrid{
+  background: var(--tertiary-bg-color) !important;
+}
+
+.ui.secondary.pointing.menu .active.item {
+  border-color: var(--button-bg-active-color) !important;
+  /* box-shadow: 0px 2px 1px var(--button-bg-active-color); */
+}
