@@ -5,6 +5,7 @@ import { parseCookies } from "nookies";
 import { useState, useEffect } from "react";
 import { Grid } from "semantic-ui-react";
 import CardPost from "./components/post/CardPost";
+import ProfileHeader from "./components/profile/ProfileHeader";
 import ProfileMenuTabs from "./components/profile/ProfileMenuTabs";
 import { baseURL } from "./util/auth";
 
@@ -59,6 +60,20 @@ const ProfilePage = ({
             ownAccount={ownAccount}
             loggedUserFollowStats={loggedUserFollowStats}
           />
+        </Grid.Column>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Column>
+          {activeItem === "profile" && (
+            <>
+              <ProfileHeader
+                profile={profile}
+                ownAccount={ownAccount}
+                loggedUserFollowStats={loggedUserFollowStats}
+                setLoggedUserFollowStats={setLoggedUserFollowStats}
+              />
+            </>
+          )}
         </Grid.Column>
       </Grid.Row>
     </Grid>

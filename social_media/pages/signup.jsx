@@ -212,9 +212,10 @@ const signup = () => {
           />
           <CommonSocials
             user={user}
-            onChange={handleChange}
+            handleChange={handleChange}
             showSocialLinks={showSocialLinks}
             setShowSocialLinks={setShowSocialLinks}
+          
           />
           <Button
             icon="signup"
