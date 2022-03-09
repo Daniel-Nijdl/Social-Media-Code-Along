@@ -4,13 +4,13 @@ import { useRouter } from "next/router";
 import { parseCookies } from "nookies";
 import { useState, useEffect } from "react";
 import { Grid } from "semantic-ui-react";
-import CardPost from "./components/post/CardPost";
-import ProfileHeader from "./components/profile/ProfileHeader";
-import ProfileMenuTabs from "./components/profile/ProfileMenuTabs";
-import { baseURL } from "./util/auth";
-import { NoProfilePost } from "./components/layout/NoData";
-import { PlaceholderPosts } from "./components/layout/PlaceHolderGroup";
-import Followers from "./components/profile/followers";
+import CardPost from "../components/post/CardPost";
+import ProfileHeader from "../components/profile/ProfileHeader";
+import ProfileMenuTabs from "../components/profile/ProfileMenuTabs";
+import { baseURL } from "./auth";
+import { NoProfilePost } from "../components/layout/NoData";
+import { PlaceholderPosts } from "../components/layout/PlaceHolderGroup";
+import Followers from "../components/profile/followers";
 
 const ProfilePage = ({
   errorLoading,
