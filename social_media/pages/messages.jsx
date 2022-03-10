@@ -7,6 +7,10 @@ import { io } from "socket.io-client";
 import { baseURL } from "./util/auth";
 import { Segment, Header, Divider, Comment, Grid } from "semantic-ui-react";
 import ChatListSearch from "./components/chat/ChatListSearch";
+import Chat from "./components/chat/Chat";
+import Banner from "./components/messages/Banner";
+import Message from "./components/messages/Message";
+import MessageInputField from "./components/messages/MessageInputField";
 
 const scrollDivToBottom = (divRef) =>
   divRef.current !== null &&
@@ -43,9 +47,45 @@ const messages = ({ chatsData, user }) => {
   };
 
   useEffect(() => {
-  socket.current.emit('loadMessages', {userId: user._id, messagesWith: router.query.message})
-  }, [router.query.message])
-  
+    const loadMessages = () => {
+      socket.current.emit("loadMessages", {
+        userId: user._id,
+        messagesWith: router.query.message,
+      });
+      socket.current.on("messagesLoaded", ({ chat }) => {
+        setMessages(chat.messages);
+        setBannerData({
+          name: chat.messagesWith.name,
+          profilePicUrl: chat.messagesWith.profilePicUrl,
+        });
+        openChatId = chat.messagesWith._id;
+        divRef.current && scrollDivToBottom(divRef);
+      });
+
+      socket.current.on("noChatFound", async () => {
+        try {
+          const res = await axios.get(
+            `${baseURL}/api/v1/messages/user/${router.query.message}`,
+            {
+              headers: { Authorization: `Bearer ${Cookies.get("token")}` },
+            }
+          );
+
+          setBannerData({
+            name: res.data,
+            profilePicUrl: res.data.profilePicUrl,
+          });
+
+          setMessages([]);
+          openChatId.current = router.query.message;
+        } catch (error) {
+          console.log(error);
+        }
+      });
+    };
+
+    if (socket.current && router.query.message) loadMessages();
+  }, [router.query.message]);
 
   const deleteChat = async (messagesWith) => {
     try {
@@ -53,6 +93,7 @@ const messages = ({ chatsData, user }) => {
         headers: { Authorization: `Bearer ${Cookies.get("token")}` },
       });
 
+      console.log(chatsData);
       setChats((prev) =>
         prev.filter((chat) => chat.messagesWith !== messagesWith)
       );
@@ -61,6 +102,21 @@ const messages = ({ chatsData, user }) => {
       console.log(error);
     }
   };
+
+  console.log(chats);
+
+  useEffect(() => {
+    messages.length > 0 && scrollDivToBottom(divRef);
+  }, [messages]);
+
+  const sendMsg = (msg) => {
+    socket.current.emit("sendNewMsg", {
+      userId: user._id,
+      msgToSendUserId: openChatId.current,
+      msg
+    });
+  };
+  const deleteMsg = () => {};
 
   return (
     <Segment>
@@ -77,14 +133,19 @@ const messages = ({ chatsData, user }) => {
       {chats.length > 0 ? (
         <>
           <Grid stackable>
-            <Grid.Column width={4}>
+            <Grid.Column width={10}>
               <Comment.Group size="big">
                 <Segment
                   raised
                   style={{ overflow: "auto", maxHeight: "32rem" }}
                 >
                   {chats.map((chat, i) => (
-                    <p key={i}>Chat Component</p>
+                    <Chat
+                      key={i}
+                      chat={chat}
+                      connectedUsers={connectedUsers}
+                      deleteChat={deleteChat}
+                    />
                   ))}
                 </Segment>
               </Comment.Group>
@@ -102,15 +163,22 @@ const messages = ({ chatsData, user }) => {
                     }}
                   >
                     <div style={{ position: "sticky", top: "0" }}>
-                      <p>Banner Component</p>
+                      <Banner bannerData={{ bannerData }} />
                     </div>
                     {messages.length > 0 &&
                       messages.map((message, i) => (
-                        <p key={i}>Message Component</p>
+                        <Message
+                          key={i}
+                          message={message}
+                          user={user}
+                          deleteMsg={deleteMsg}
+                          bannerProfilePic={bannerProfilePic}
+                          divRef={divRef}
+                        />
                       ))}
                   </div>
 
-                  <p>Message Input Component</p>
+                  <MessageInputField sendMsg={sendMsg} />
                 </>
               )}
             </Grid.Column>
@@ -131,7 +199,7 @@ messages.getInitialProps = async (ctx) => {
         Authorization: `Bearer ${token}`,
       },
     });
-
+    console.log(res.data);
     return { chatsData: res.data };
   } catch (error) {
     return { errorLoading: true };

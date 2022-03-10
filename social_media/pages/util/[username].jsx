@@ -51,6 +51,8 @@ const ProfilePage = ({
     getPosts();
   }, [router.query.username]);
 
+  if (!profile) return null;
+
   return (
     <Grid stackable>
       <Grid.Row>
@@ -78,11 +80,12 @@ const ProfilePage = ({
               {loading ? (
                 <PlaceholderPosts />
               ) : posts ? (
-                posts.map(post => (
-                  <CardPost key={post.id} 
-                  post={post}
-                  user={user}
-                  setPosts={setPosts}
+                posts.map((post) => (
+                  <CardPost
+                    key={post.id}
+                    post={post}
+                    user={user}
+                    setPosts={setPosts}
                   />
                 ))
               ) : (

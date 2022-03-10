@@ -10,8 +10,9 @@ const getChats = async (req, res) => {
       "chats.messagesWith"
     );
     let chatsToBeSent = [];
-
+    console.log(user);
     if (user.chats.length > 0) {
+      console.log("test");
       chatsToBeSent = await user.chats.map((chat) => ({
         messagesWith: chat.messagesWith._id,
         name: chat.messagesWith.name,
@@ -65,7 +66,7 @@ const deleteChat = async (req, res) => {
 
     await user.save();
 
-    return res.status(200).send("Chat Deleted")
+    return res.status(200).send("Chat Deleted");
   } catch (error) {
     console.log(error);
     return res.status(500).send("Error @ deletChat");
