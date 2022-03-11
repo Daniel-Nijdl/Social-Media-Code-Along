@@ -32,7 +32,7 @@ const getChats = async (req, res) => {
 
 const getUserInfo = async (req, res) => {
   try {
-    const user = await UserModel.findById(req.params.user.userToFindId);
+    const user = await UserModel.findById(req.params.userToFindId);
     if (!user) return res.status(404).send("User not found");
 
     return res

@@ -4,11 +4,12 @@ import { useRouter } from "next/router";
 import calculateTime from "../../util/calculateTime";
 
 const Chat = ({ chat, connectedUsers, deleteChat }) => {
-  console.log(chat);
   const router = useRouter();
-  const isOnline = connectedUsers.some(
+
+  const isOnline = connectedUsers.find(
     (user) => user.userId === chat.messagesWith
   );
+
   return (
     <>
       <List selection>
@@ -31,18 +32,27 @@ const Chat = ({ chat, connectedUsers, deleteChat }) => {
                   <Icon name="circle outline" size="small" />
                 )}
               </Comment.Author>
-              <Comment.Metadata>{calculateTime(chat.date)}</Comment.Metadata>
+
               <Comment.Metadata>
-                <Icon
-                  style={{ cursor: "pointer" }}
-                  name="trash"
-                  color="red"
-                  onClick={() => deleteChat(chat.messagesWith)}
-                />
+                <div>{calculateTime(chat.date)}</div>
+                <div
+                  style={{
+                    position: "absolute",
+                    right: "10px",
+                    cursor: "pointer",
+                  }}
+                >
+                  <Icon
+                    style={{ cursor: "pointer" }}
+                    name="trash"
+                    color="red"
+                    onClick={() => deleteChat(chat.messagesWith)}
+                  />
+                </div>
               </Comment.Metadata>
               <Comment.Text>
-                {chat?.lastMessage?.length > 20
-                  ? `${chat?.lastMessage.substring(0, 20)} ...`
+                {chat.lastMessage.length > 20
+                  ? `${chat.lastMessage.substring(0, 20)} ...`
                   : chat.lastMessage}
               </Comment.Text>
             </Comment.Content>

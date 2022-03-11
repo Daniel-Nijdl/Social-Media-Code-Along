@@ -1,8 +1,8 @@
+import React, { useState } from "react";
+import { List, Image, Search } from "semantic-ui-react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
-import { useState } from "react";
-import { List, Image, Search } from "semantic-ui-react";
 import { baseURL } from "../../util/auth";
 let cancel;
 
@@ -16,11 +16,9 @@ const ChatListSearch = ({ chats, setChats }) => {
     const { value } = e.target;
     setText(value);
     setLoading(true);
-
     try {
       cancel && cancel();
       const token = Cookies.get("token");
-
       const res = await axios.get(`${baseURL}/api/v1/search/${value}`, {
         headers: { Authorization: `Bearer ${token}` },
         cancelToken: new axios.CancelToken((canceler) => {
@@ -29,7 +27,6 @@ const ChatListSearch = ({ chats, setChats }) => {
       });
 
       if (res.data.length === 0) return setLoading(false);
-
       setResults(res.data);
     } catch (error) {
       console.log(error);
@@ -70,7 +67,7 @@ const ChatListSearch = ({ chats, setChats }) => {
       results={results}
       onSearchChange={handleChange}
       minCharacters={1}
-      onResultSelect={(e, data) => addChat(data.results)}
+      onResultSelect={(e, data) => addChat(data.result)}
     />
   );
 };

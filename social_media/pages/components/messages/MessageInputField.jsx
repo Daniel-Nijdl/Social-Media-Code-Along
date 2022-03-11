@@ -4,6 +4,7 @@ import { Form, Segment } from "semantic-ui-react";
 const MessageInputField = ({ sendMsg }) => {
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
+  
   return (
     <div style={{ position: "sticky", bottom: "0" }}>
       <Segment secondary color="teal" attached="bottom">
