@@ -18,7 +18,7 @@ const Navbar = () => {
       </Menu.Menu> */}
       <Container text>
         <Link href="/login">
-          <Menu.Item header active={isActive("/login")}>
+          <Menu.Item header active={isActive("/login")} position="left">
             <Icon name="sign in" size="large" />
             Login
           </Menu.Item>
@@ -29,6 +29,7 @@ const Navbar = () => {
             Sign Up
           </Menu.Item>
         </Link>
+
       </Container>
       
     </Menu>
